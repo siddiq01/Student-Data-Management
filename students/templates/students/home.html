@@ -1,0 +1,82 @@
+{% extends 'students/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📊 Student Management Dashboard</h2>
+
+    <!-- Total Students -->
+    <div class="card text-white bg-primary mb-4">
+        <div class="card-body">
+            <h4>Total Students: {{ total_students }}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Class-wise Strength Chart -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Class-wise Strength</h5>
+                    <canvas id="classStrengthChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gender Distribution Chart -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Gender Distribution</h5>
+                    <canvas id="genderDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Class Strength Bar Chart
+    const classCtx = document.getElementById('classStrengthChart');
+    new Chart(classCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ class_strength_data.labels|safe }},
+            datasets: [{
+                label: 'Number of Students',
+                data: {{ class_strength_data.data|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Gender Pie Chart
+    const genderCtx = document.getElementById('genderDistributionChart');
+    new Chart(genderCtx, {
+        type: 'pie',
+        data: {
+            labels: {{ gender_distribution_data.labels|safe }},
+            datasets: [{
+                data: {{ gender_distribution_data.data|safe }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',  // red
+                    'rgba(75, 192, 192, 0.6)'   // green
+                ]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+{% endblock %}

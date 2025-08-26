@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Data Management System</title>
+    <!-- ✅ Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+    body {
+        background: #f4f6f9;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+        transition: 0.3s;
+    }
+    .card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+</style>
+
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'students/navbar.html' %}
+
+    <!-- Page Content -->
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

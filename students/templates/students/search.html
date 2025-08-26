@@ -1,0 +1,37 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">🔍 Search Students</h2>
+
+    <form method="get" class="form-inline mb-4">
+        <div class="input-group">
+            <input type="text" name="query" placeholder="Enter student name..." value="{{ query }}" class="form-control" />
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    {% if students %}
+        <div class="row">
+            {% for s in students %}
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ s.name }}</h5>
+                            <p class="card-text">
+                                📧 <strong>Email:</strong> {{ s.email }}<br />
+                                📞 <strong>Phone:</strong> {{ s.phone }}<br />
+                                🏫 <strong>Class:</strong> {{ s.student_class }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">No students found matching your search.</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<h2>{{ student.name }}'s Profile</h2>
+
+{% if student.profile_pic %}
+  <img src="{{ student.profile_pic.url }}" height="120" width="120" alt="Profile Photo">
+  <p>{{ student.profile_pic.url }}</p>  <!-- For debugging -->
+
+{% else %}
+  <p><strong>No profile picture uploaded.</strong></p>
+{% endif %}
+
+<p>Email: {{ student.email }}</p>
+<p>Class: {{ student.student_class }}</p>
+<p>Age: {{ student.age }}</p>
+
+<h4>Attendance Records</h4>
+<ul>
+  {% for a in attendance %}
+    <li>{{ a.date }} - {{ a.status }}</li>
+  {% empty %}
+    <li>No attendance records found.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'download_report' student.id %}" class="btn btn-secondary mt-2">Download PDF Report</a>
+{% endblock %}
